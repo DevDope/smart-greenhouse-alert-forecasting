@@ -27,6 +27,18 @@ The full dataset is stored as:
 data/raw/texcoco/texcoco.rar
 ```
 
+Dataset access form:
+
+```text
+https://forms.gle/iCwtibHp6EguPpFaA
+```
+
+The compressed dataset file included in this repository is located at:
+
+```text
+data/raw/texcoco/texcoco.rar
+```
+
 Extract it before running experiments. The expected extracted CSV is:
 
 ```text
@@ -38,6 +50,8 @@ The archive hash is recorded in `data/raw/texcoco/MANIFEST.json`.
 ## Dataset
 
 The dataset contains greenhouse sensor readings from Texcoco, State of Mexico, Mexico, combined with external weather-source variables and astronomical context used by the benchmark. It is distributed as a compressed archive so reviewers can reproduce the exact input used by the pipeline.
+
+For controlled access, dataset requests should be submitted through the access form: <https://forms.gle/iCwtibHp6EguPpFaA>. The compressed dataset file is stored in this repository at `data/raw/texcoco/texcoco.rar`.
 
 The main metric dictionary is provided in:
 
