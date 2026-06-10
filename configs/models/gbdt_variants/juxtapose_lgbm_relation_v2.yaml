@@ -1,0 +1,23 @@
+name: juxtapose_lgbm_relation_v2
+registry_name: juxtapose_lgbm_relation_v2
+type: tabular
+family: gbdt_variant
+representation_tag: current
+params:
+  calibration_method: sigmoid
+  calibration_fraction: 0.2
+  threshold_metric: f1
+  n_estimators: 160
+  bridge_n_estimators: 72
+  learning_rate: 0.05
+  num_leaves: 31
+  subsample: 0.9
+  colsample_bytree: 0.85
+  random_state: 42
+  relation_min_score: 0.08
+  cross_fit_splits: 4
+  use_source_aware_encoder: true
+  use_relation_graph: true
+  use_cross_fitted_bridge: true
+  use_negative_transfer_guard: true
+  single_task: false

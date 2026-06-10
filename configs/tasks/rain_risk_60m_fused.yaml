@@ -1,0 +1,23 @@
+name: rain_risk_60m_fused
+task_type: classification
+site: texcoco
+horizon_minutes: 60
+window_size_steps: 12
+label_column: rain_risk_60m_fused
+rule:
+  type: agronomic_alarm
+  alarm_name: rain_risk
+  columns:
+    outside_precipitation:
+      - outside_fused_precipitation_max
+    outside_precipitation_rolling_6h:
+      - outside_fused_precipitation_rolling_sum_6h_mean
+    outside_precipitation_rolling_24h:
+      - outside_fused_precipitation_rolling_sum_24h_mean
+  thresholds:
+    rain_current_min: 8.0
+    rain_rolling_6h_min: 30.0
+    rain_rolling_24h_min: 120.0
+  options:
+    include_rolling_24h: true
+classes: ["0", "1"]

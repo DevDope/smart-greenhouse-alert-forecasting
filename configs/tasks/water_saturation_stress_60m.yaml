@@ -1,0 +1,14 @@
+name: water_saturation_stress_60m
+task_type: classification
+site: texcoco
+horizon_minutes: 60
+window_size_steps: 12
+label_column: water_saturation_stress_60m
+rule:
+  type: agronomic_alarm
+  alarm_name: water_saturation_stress
+  columns:
+    soil_moisture: hum_suelo
+  thresholds:
+    soil_moisture_saturation: 85.0
+classes: ["0", "1"]

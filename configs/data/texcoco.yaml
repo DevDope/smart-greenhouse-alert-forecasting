@@ -1,0 +1,79 @@
+extends: configs/data/base.yaml
+site: texcoco
+source:
+  type: auto
+  file_patterns:
+    - data/raw/texcoco/*.csv
+    - data/raw/texcoco/*.parquet
+  adapter:
+    timestamp:
+      target: timestamp
+      from_columns: [fecha, hora]
+      separator: " "
+      dayfirst: true
+      errors: coerce
+    mappings:
+      required:
+        soil_moisture:
+          source: hum_suelo
+          dtype: float
+        air_temperature:
+          source: temp_aire_media
+          dtype: float
+        relative_humidity:
+          source: hum_aire_media
+          dtype: float
+        radiation_proxy:
+          source: ppfd
+          dtype: float
+      optional:
+        soil_temperature:
+          source: temp_suelo
+          dtype: float
+        vpd:
+          source: vpd_media
+          dtype: float
+        light_lux:
+          source: lux
+          dtype: float
+        ec25:
+          source: ec25_uScm
+          dtype: float
+        ph:
+          source: ph
+          dtype: float
+        irrigation_event_observed:
+          source: trigger.irrigation_event
+          dtype: float
+        irrigation_lph:
+          source: irrigation_lph
+          dtype: float
+    preserve_raw_columns:
+      - fecha
+      - hora
+      - hum_suelo
+      - temp_aire_media
+      - hum_aire_media
+      - ppfd
+      - lux
+      - temp_suelo
+      - vpd_media
+      - ec25_uScm
+      - ph
+      - trigger.irrigation_event
+    create_optional_columns: true
+    drop_invalid_timestamps: true
+  synthetic_fallback:
+    enabled: true
+    seed: 2026
+    start: "2024-01-01T00:00:00"
+    periods: 2160
+    frequency: 5min
+feature_engineering:
+  include_raw_features: true
+  lags: [1, 2, 3, 6, 12, 24]
+  rolling_windows: [3, 6, 12, 24]
+  rolling_statistics: [mean, std, min, max]
+  deltas: [1, 3]
+  include_calendar: true
+  window_size_steps: 12

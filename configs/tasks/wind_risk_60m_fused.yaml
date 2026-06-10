@@ -1,0 +1,21 @@
+name: wind_risk_60m_fused
+task_type: classification
+site: texcoco
+horizon_minutes: 60
+window_size_steps: 12
+label_column: wind_risk_60m_fused
+rule:
+  type: agronomic_alarm
+  alarm_name: wind_risk
+  columns:
+    outside_wind_speed:
+      - outside_openmeteo_wind_speed_10m
+      - outside_nasa_WS10M
+  thresholds:
+    wind_speed_high: 8.0
+    wind_speed_high_by_column:
+      outside_openmeteo_wind_speed_10m: 13.0
+      outside_nasa_WS10M: 3.5
+  options:
+    unit_note: fused_per_column_thresholds
+classes: ["0", "1"]

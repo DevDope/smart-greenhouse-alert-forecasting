@@ -1,0 +1,150 @@
+extends: configs/data/texcoco_enriched_base.yaml
+weather_source_view: nasa
+source:
+  adapter:
+    mappings:
+      optional:
+        outside_nasa_T2M: {source: outside_nasa_T2M, dtype: float}
+        outside_nasa_RH2M: {source: outside_nasa_RH2M, dtype: float}
+        outside_nasa_T2MDEW: {source: outside_nasa_T2MDEW, dtype: float}
+        outside_nasa_PRECTOTCORR: {source: outside_nasa_PRECTOTCORR, dtype: float}
+        outside_nasa_PS: {source: outside_nasa_PS, dtype: float}
+        outside_nasa_WS2M: {source: outside_nasa_WS2M, dtype: float}
+        outside_nasa_WS10M: {source: outside_nasa_WS10M, dtype: float}
+        outside_nasa_WD10M: {source: outside_nasa_WD10M, dtype: float}
+        outside_nasa_ALLSKY_SFC_SW_DWN: {source: outside_nasa_ALLSKY_SFC_SW_DWN, dtype: float}
+        outside_nasa_ALLSKY_SFC_PAR_TOT: {source: outside_nasa_ALLSKY_SFC_PAR_TOT, dtype: float}
+        outside_nasa_vpd_kpa: {source: outside_nasa_vpd_kpa, dtype: float}
+        outside_nasa_daylight_flag: {source: outside_nasa_daylight_flag, dtype: float}
+        outside_nasa_radiation_daily_sum: {source: outside_nasa_radiation_daily_sum, dtype: float}
+        outside_nasa_precipitation_daily_sum: {source: outside_nasa_precipitation_daily_sum, dtype: float}
+        outside_nasa_temperature_lag_1h: {source: outside_nasa_temperature_lag_1h, dtype: float}
+        outside_nasa_relative_humidity_lag_1h: {source: outside_nasa_relative_humidity_lag_1h, dtype: float}
+        outside_nasa_temperature_lag_3h: {source: outside_nasa_temperature_lag_3h, dtype: float}
+        outside_nasa_relative_humidity_lag_3h: {source: outside_nasa_relative_humidity_lag_3h, dtype: float}
+        outside_nasa_temperature_lag_6h: {source: outside_nasa_temperature_lag_6h, dtype: float}
+        outside_nasa_relative_humidity_lag_6h: {source: outside_nasa_relative_humidity_lag_6h, dtype: float}
+        outside_nasa_radiation_rolling_sum_3h: {source: outside_nasa_radiation_rolling_sum_3h, dtype: float}
+        outside_nasa_radiation_rolling_sum_6h: {source: outside_nasa_radiation_rolling_sum_6h, dtype: float}
+        outside_nasa_radiation_rolling_sum_12h: {source: outside_nasa_radiation_rolling_sum_12h, dtype: float}
+        outside_nasa_precipitation_rolling_sum_6h: {source: outside_nasa_precipitation_rolling_sum_6h, dtype: float}
+        outside_nasa_precipitation_rolling_sum_24h: {source: outside_nasa_precipitation_rolling_sum_24h, dtype: float}
+        outside_nasa_precipitation_rolling_sum_48h: {source: outside_nasa_precipitation_rolling_sum_48h, dtype: float}
+        outside_nasa_temperature_daily_min: {source: outside_nasa_temperature_daily_min, dtype: float}
+        outside_nasa_temperature_daily_max: {source: outside_nasa_temperature_daily_max, dtype: float}
+        outside_nasa_temperature_daily_mean: {source: outside_nasa_temperature_daily_mean, dtype: float}
+        outside_nasa_temperature_daily_amplitude: {source: outside_nasa_temperature_daily_amplitude, dtype: float}
+        outside_nasa_vpd_daily_max: {source: outside_nasa_vpd_daily_max, dtype: float}
+        outside_nasa_radiation_hours_daily: {source: outside_nasa_radiation_hours_daily, dtype: float}
+        outside_nasa_delta_temp_inside_outside: {source: outside_nasa_delta_temp_inside_outside, dtype: float}
+        outside_nasa_delta_rh_inside_outside: {source: outside_nasa_delta_rh_inside_outside, dtype: float}
+        outside_nasa_delta_vpd_inside_outside: {source: outside_nasa_delta_vpd_inside_outside, dtype: float}
+        outside_nasa_greenhouse_temp_gain: {source: outside_nasa_greenhouse_temp_gain, dtype: float}
+        outside_nasa_greenhouse_vpd_buffer: {source: outside_nasa_greenhouse_vpd_buffer, dtype: float}
+        outside_solar_elevation_angle: {source: outside_solar_elevation_angle, dtype: float}
+        outside_day_length_hours: {source: outside_day_length_hours, dtype: float}
+        outside_minutes_since_sunrise: {source: outside_minutes_since_sunrise, dtype: float}
+        outside_minutes_until_sunset: {source: outside_minutes_until_sunset, dtype: float}
+schema:
+  optional_columns:
+    - soil_temperature
+    - vpd
+    - light_lux
+    - ec25
+    - ph
+    - irrigation_event_observed
+    - irrigation_lph
+    - outside_nasa_T2M
+    - outside_nasa_RH2M
+    - outside_nasa_T2MDEW
+    - outside_nasa_PRECTOTCORR
+    - outside_nasa_PS
+    - outside_nasa_WS2M
+    - outside_nasa_WS10M
+    - outside_nasa_WD10M
+    - outside_nasa_ALLSKY_SFC_SW_DWN
+    - outside_nasa_ALLSKY_SFC_PAR_TOT
+    - outside_nasa_vpd_kpa
+    - outside_nasa_daylight_flag
+    - outside_nasa_radiation_daily_sum
+    - outside_nasa_precipitation_daily_sum
+    - outside_nasa_temperature_lag_1h
+    - outside_nasa_relative_humidity_lag_1h
+    - outside_nasa_temperature_lag_3h
+    - outside_nasa_relative_humidity_lag_3h
+    - outside_nasa_temperature_lag_6h
+    - outside_nasa_relative_humidity_lag_6h
+    - outside_nasa_radiation_rolling_sum_3h
+    - outside_nasa_radiation_rolling_sum_6h
+    - outside_nasa_radiation_rolling_sum_12h
+    - outside_nasa_precipitation_rolling_sum_6h
+    - outside_nasa_precipitation_rolling_sum_24h
+    - outside_nasa_precipitation_rolling_sum_48h
+    - outside_nasa_temperature_daily_min
+    - outside_nasa_temperature_daily_max
+    - outside_nasa_temperature_daily_mean
+    - outside_nasa_temperature_daily_amplitude
+    - outside_nasa_vpd_daily_max
+    - outside_nasa_radiation_hours_daily
+    - outside_nasa_delta_temp_inside_outside
+    - outside_nasa_delta_rh_inside_outside
+    - outside_nasa_delta_vpd_inside_outside
+    - outside_nasa_greenhouse_temp_gain
+    - outside_nasa_greenhouse_vpd_buffer
+    - outside_solar_elevation_angle
+    - outside_day_length_hours
+    - outside_minutes_since_sunrise
+    - outside_minutes_until_sunset
+numeric_features:
+  - soil_moisture
+  - air_temperature
+  - relative_humidity
+  - radiation_proxy
+  - soil_temperature
+  - vpd
+  - light_lux
+  - ec25
+  - ph
+  - irrigation_event_observed
+  - irrigation_lph
+  - outside_nasa_T2M
+  - outside_nasa_RH2M
+  - outside_nasa_T2MDEW
+  - outside_nasa_PRECTOTCORR
+  - outside_nasa_PS
+  - outside_nasa_WS2M
+  - outside_nasa_WS10M
+  - outside_nasa_WD10M
+  - outside_nasa_ALLSKY_SFC_SW_DWN
+  - outside_nasa_ALLSKY_SFC_PAR_TOT
+  - outside_nasa_vpd_kpa
+  - outside_nasa_daylight_flag
+  - outside_nasa_radiation_daily_sum
+  - outside_nasa_precipitation_daily_sum
+  - outside_nasa_temperature_lag_1h
+  - outside_nasa_relative_humidity_lag_1h
+  - outside_nasa_temperature_lag_3h
+  - outside_nasa_relative_humidity_lag_3h
+  - outside_nasa_temperature_lag_6h
+  - outside_nasa_relative_humidity_lag_6h
+  - outside_nasa_radiation_rolling_sum_3h
+  - outside_nasa_radiation_rolling_sum_6h
+  - outside_nasa_radiation_rolling_sum_12h
+  - outside_nasa_precipitation_rolling_sum_6h
+  - outside_nasa_precipitation_rolling_sum_24h
+  - outside_nasa_precipitation_rolling_sum_48h
+  - outside_nasa_temperature_daily_min
+  - outside_nasa_temperature_daily_max
+  - outside_nasa_temperature_daily_mean
+  - outside_nasa_temperature_daily_amplitude
+  - outside_nasa_vpd_daily_max
+  - outside_nasa_radiation_hours_daily
+  - outside_nasa_delta_temp_inside_outside
+  - outside_nasa_delta_rh_inside_outside
+  - outside_nasa_delta_vpd_inside_outside
+  - outside_nasa_greenhouse_temp_gain
+  - outside_nasa_greenhouse_vpd_buffer
+  - outside_solar_elevation_angle
+  - outside_day_length_hours
+  - outside_minutes_since_sunrise
+  - outside_minutes_until_sunset

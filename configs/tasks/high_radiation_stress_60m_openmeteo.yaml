@@ -1,0 +1,20 @@
+name: high_radiation_stress_60m_openmeteo
+task_type: classification
+site: texcoco
+horizon_minutes: 60
+window_size_steps: 12
+label_column: high_radiation_stress_60m_openmeteo
+rule:
+  type: agronomic_alarm
+  alarm_name: high_radiation_stress
+  columns:
+    air_temperature: temp_aire_media
+    vpd: vpd_media
+    outside_radiation: outside_openmeteo_shortwave_radiation
+  thresholds:
+    outside_radiation_high: 850.0
+    temp_high_functional: 32.0
+    vpd_stress: 1.5
+  options:
+    include_vpd_stress: true
+classes: ["0", "1"]

@@ -1,0 +1,7 @@
+extends: configs/data/texcoco.yaml
+source:
+  type: files
+  file_patterns:
+    - data/raw/texcoco/proto_enriched_outside_weather.csv
+  synthetic_fallback:
+    enabled: false

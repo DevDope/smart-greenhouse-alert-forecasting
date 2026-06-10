@@ -1,0 +1,9 @@
+name: logistic
+type: tabular
+family: baseline_tabular
+representation_tag: current
+params:
+  C: 1.0
+  max_iter: 3000
+  class_weight: balanced
+  solver: lbfgs

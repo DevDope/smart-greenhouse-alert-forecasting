@@ -1,0 +1,16 @@
+name: wind_risk_60m_nasa
+task_type: classification
+site: texcoco
+horizon_minutes: 60
+window_size_steps: 12
+label_column: wind_risk_60m_nasa
+rule:
+  type: agronomic_alarm
+  alarm_name: wind_risk
+  columns:
+    outside_wind_speed: outside_nasa_WS10M
+  thresholds:
+    wind_speed_high: 3.5
+  options:
+    unit_note: nasa_m_s
+classes: ["0", "1"]

@@ -1,0 +1,11 @@
+name: lightgbm
+type: tabular
+family: baseline_tabular
+representation_tag: current
+params:
+  n_estimators: 200
+  num_leaves: 31
+  learning_rate: 0.05
+  subsample: 0.9
+  colsample_bytree: 0.9
+  random_state: 42

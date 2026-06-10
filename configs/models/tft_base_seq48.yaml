@@ -1,0 +1,31 @@
+name: tft_base_seq48
+registry_name: tft_base
+type: transformer
+family: transformer
+representation_tag: sequence_first_48
+params:
+  d_model: 64
+  hidden_size: 64
+  num_layers_local: 1
+  attention_heads: 4
+  dropout: 0.1
+  readout_mode: last_valid
+  enabled_tasks: [event_60m, event_120m]
+  use_static: false
+  use_time_features: true
+  variable_selection: true
+  use_missingness_channels: true
+  task_weights:
+    event_60m: 1.0
+    event_120m: 1.0
+  batch_size: 256
+  learning_rate: 0.001
+  max_epochs: 3
+  patience: 1
+  val_fraction: 0.1
+  weight_decay: 0.0001
+  class_weight: balanced
+  device: cpu
+  representation: sequence_first
+  context_steps: 48
+  static_mode: calendar

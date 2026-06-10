@@ -1,0 +1,6 @@
+name: naive
+type: tabular
+family: baseline_tabular
+representation_tag: current
+params:
+  strategy: most_frequent

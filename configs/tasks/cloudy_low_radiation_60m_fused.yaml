@@ -1,0 +1,23 @@
+name: cloudy_low_radiation_60m_fused
+task_type: classification
+site: texcoco
+horizon_minutes: 60
+window_size_steps: 12
+label_column: cloudy_low_radiation_60m_fused
+rule:
+  type: agronomic_alarm
+  alarm_name: cloudy_low_radiation
+  columns:
+    outside_radiation:
+      - outside_fused_shortwave_radiation_mean
+    outside_radiation_rolling_6h:
+      - outside_fused_radiation_rolling_sum_6h_mean
+    outside_daylight_flag:
+      - outside_fused_daylight_flag_max
+  thresholds:
+    outside_radiation_low: 100.0
+    outside_radiation_rolling_6h_low: 500.0
+    outside_daylight_min: 0.5
+  options:
+    include_rolling_6h: false
+classes: ["0", "1"]

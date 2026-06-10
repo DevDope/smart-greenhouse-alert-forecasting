@@ -1,0 +1,20 @@
+name: high_radiation_stress_60m_nasa
+task_type: classification
+site: texcoco
+horizon_minutes: 60
+window_size_steps: 12
+label_column: high_radiation_stress_60m_nasa
+rule:
+  type: agronomic_alarm
+  alarm_name: high_radiation_stress
+  columns:
+    air_temperature: temp_aire_media
+    vpd: vpd_media
+    outside_radiation: outside_nasa_ALLSKY_SFC_SW_DWN
+  thresholds:
+    outside_radiation_high: 2.0
+    temp_high_functional: 30.0
+    vpd_stress: 1.3
+  options:
+    include_vpd_stress: true
+classes: ["0", "1"]

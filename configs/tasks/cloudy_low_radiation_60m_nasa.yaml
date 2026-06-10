@@ -1,0 +1,20 @@
+name: cloudy_low_radiation_60m_nasa
+task_type: classification
+site: texcoco
+horizon_minutes: 60
+window_size_steps: 12
+label_column: cloudy_low_radiation_60m_nasa
+rule:
+  type: agronomic_alarm
+  alarm_name: cloudy_low_radiation
+  columns:
+    outside_radiation: outside_nasa_ALLSKY_SFC_SW_DWN
+    outside_radiation_rolling_6h: outside_nasa_radiation_rolling_sum_6h
+    outside_daylight_flag: outside_nasa_daylight_flag
+  thresholds:
+    outside_radiation_low: 1.0
+    outside_radiation_rolling_6h_low: 5.0
+    outside_daylight_min: 0.5
+  options:
+    include_rolling_6h: true
+classes: ["0", "1"]

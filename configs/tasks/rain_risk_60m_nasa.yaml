@@ -1,0 +1,20 @@
+name: rain_risk_60m_nasa
+task_type: classification
+site: texcoco
+horizon_minutes: 60
+window_size_steps: 12
+label_column: rain_risk_60m_nasa
+rule:
+  type: agronomic_alarm
+  alarm_name: rain_risk
+  columns:
+    outside_precipitation: outside_nasa_PRECTOTCORR
+    outside_precipitation_rolling_6h: outside_nasa_precipitation_rolling_sum_6h
+    outside_precipitation_rolling_24h: outside_nasa_precipitation_rolling_sum_24h
+  thresholds:
+    rain_current_min: 8.0
+    rain_rolling_6h_min: 50.0
+    rain_rolling_24h_min: 150.0
+  options:
+    include_rolling_24h: true
+classes: ["0", "1"]

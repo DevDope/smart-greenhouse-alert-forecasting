@@ -1,0 +1,103 @@
+name: exp19_q1_all_models_all_alerts_weather_leaderboard
+seed: 42
+task_configs: []
+model_configs:
+  - configs/models/naive.yaml
+  - configs/models/logistic.yaml
+  - configs/models/xgboost.yaml
+  - configs/models/lightgbm.yaml
+  - configs/models/gbdt_variants/fripp_lgbm_sparse.yaml
+  - configs/models/gbdt_variants/zappa_lgbm_chain.yaml
+  - configs/models/gbdt_variants/discipline_lgbm_sparse.yaml
+  - configs/models/gbdt_variants/juxtapose_lgbm_chain.yaml
+  - configs/models/gbdt_variants/juxtapose_lgbm_relation_v2.yaml
+  - configs/models/gru_seq48.yaml
+  - configs/models/tcn_seq48.yaml
+  - configs/models/vanilla_transformer_seq48.yaml
+  - configs/models/tft_base_seq48.yaml
+weather_source_views:
+  - name: openmeteo
+    data_config: configs/data/texcoco_enriched_openmeteo.yaml
+    task_configs:
+      - configs/tasks/heat_water_stress_60m.yaml
+      - configs/tasks/water_saturation_stress_60m.yaml
+      - configs/tasks/pollination_window_expert_60m.yaml
+      - configs/tasks/rain_risk_60m_openmeteo.yaml
+      - configs/tasks/wind_risk_60m_openmeteo.yaml
+      - configs/tasks/cloudy_low_radiation_60m_openmeteo.yaml
+      - configs/tasks/high_radiation_stress_60m_openmeteo.yaml
+  - name: nasa
+    data_config: configs/data/texcoco_enriched_nasa.yaml
+    task_configs:
+      - configs/tasks/heat_water_stress_60m.yaml
+      - configs/tasks/water_saturation_stress_60m.yaml
+      - configs/tasks/pollination_window_expert_60m.yaml
+      - configs/tasks/rain_risk_60m_nasa.yaml
+      - configs/tasks/wind_risk_60m_nasa.yaml
+      - configs/tasks/cloudy_low_radiation_60m_nasa.yaml
+      - configs/tasks/high_radiation_stress_60m_nasa.yaml
+  - name: fused
+    data_config: configs/data/texcoco_enriched_fused.yaml
+    task_configs:
+      - configs/tasks/heat_water_stress_60m.yaml
+      - configs/tasks/water_saturation_stress_60m.yaml
+      - configs/tasks/pollination_window_expert_60m.yaml
+      - configs/tasks/rain_risk_60m_fused.yaml
+      - configs/tasks/wind_risk_60m_fused.yaml
+      - configs/tasks/cloudy_low_radiation_60m_fused.yaml
+      - configs/tasks/high_radiation_stress_60m_fused.yaml
+split:
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+diagnostics:
+  reproducibility_check: true
+posthoc:
+  temperature_scaling: true
+  threshold_tuning: true
+  selection_metric: f1
+paper_eval:
+  family: all_model_weather_alert_leaderboard
+  comparison_purpose: exp15_style_all_models_against_all_weather_alerts
+  weather_source_views:
+    - openmeteo
+    - nasa
+    - fused
+  alert_tasks:
+    - heat_water_stress_60m
+    - water_saturation_stress_60m
+    - pollination_window_expert_60m
+    - rain_risk_60m
+    - wind_risk_60m
+    - cloudy_low_radiation_60m
+    - high_radiation_stress_60m
+  baseline_models:
+    - naive
+    - logistic
+    - xgboost
+    - lightgbm
+  historical_wrappers:
+    - fripp_lgbm_sparse
+    - zappa_lgbm_chain
+  official_architectures:
+    - discipline_lgbm_sparse
+    - juxtapose_lgbm_chain
+    - juxtapose_lgbm_relation_v2
+  sequence_models:
+    - gru
+    - tcn
+    - vanilla_transformer
+    - tft_base
+  primary_metrics:
+    - f1
+    - pr_auc
+    - roc_auc
+    - balanced_accuracy
+    - brier_score
+    - ece
+    - training_seconds
+    - inference_seconds
+    - artifact_size_kb
+artifacts:
+  processed_dir: data/processed
+  results_dir: results

@@ -1,0 +1,27 @@
+name: pollination_window_expert_60m
+task_type: classification
+site: texcoco
+horizon_minutes: 60
+window_size_steps: 12
+label_column: pollination_window_expert_60m
+rule:
+  type: agronomic_alarm
+  alarm_name: pollination_window_expert
+  columns:
+    air_temperature: temp_aire_media
+    relative_humidity: hum_aire_media
+    vpd: vpd_media
+    radiation_primary: ppfd
+    radiation_fallback: lux
+  thresholds:
+    temp_low_functional: 16.0
+    temp_high_functional: 34.0
+    rh_pollination_min: 75.0
+    rh_pollination_block: 60.0
+    vpd_opt_low: 0.6
+    vpd_opt_high: 1.2
+    ppfd_min_useful: 20.0
+    lux_per_ppfd: 54.0
+  options:
+    require_vpd_range: false
+classes: ["0", "1"]

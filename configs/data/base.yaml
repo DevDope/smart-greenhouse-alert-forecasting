@@ -1,0 +1,129 @@
+site: texcoco
+timezone: America/Mexico_City
+timestamp_column: timestamp
+frequency: 5min
+source:
+  type: auto
+  file_patterns:
+    - data/raw/texcoco/*.csv
+    - data/raw/texcoco/*.parquet
+  adapter:
+    timestamp:
+      target: timestamp
+      source_column: timestamp
+      dayfirst: true
+      errors: coerce
+    mappings:
+      required:
+        soil_moisture:
+          source: soil_moisture
+          dtype: float
+        air_temperature:
+          source: air_temperature
+          dtype: float
+        relative_humidity:
+          source: relative_humidity
+          dtype: float
+        radiation_proxy:
+          source: radiation_proxy
+          dtype: float
+      optional:
+        soil_temperature:
+          source: soil_temperature
+          dtype: float
+        vpd:
+          source: vpd
+          dtype: float
+        light_lux:
+          source: light_lux
+          dtype: float
+        ec25:
+          source: ec25
+          dtype: float
+        ph:
+          source: ph
+          dtype: float
+        irrigation_event_observed:
+          source: irrigation_event_observed
+          dtype: float
+        irrigation_lph:
+          source: irrigation_lph
+          dtype: float
+    preserve_raw_columns: []
+    create_optional_columns: true
+    drop_invalid_timestamps: true
+  synthetic_fallback:
+    enabled: true
+    seed: 2026
+    start: "2024-01-01T00:00:00"
+    periods: 1440
+    frequency: 5min
+schema:
+  required_columns:
+    - timestamp
+    - soil_moisture
+    - air_temperature
+    - relative_humidity
+    - radiation_proxy
+  optional_columns:
+    - soil_temperature
+    - vpd
+    - light_lux
+    - ec25
+    - ph
+    - irrigation_event_observed
+    - irrigation_lph
+  dtypes:
+    soil_moisture: float
+    air_temperature: float
+    relative_humidity: float
+    radiation_proxy: float
+    soil_temperature: float
+    vpd: float
+    light_lux: float
+    ec25: float
+    ph: float
+    irrigation_event_observed: float
+    irrigation_lph: float
+numeric_features:
+  - soil_moisture
+  - air_temperature
+  - relative_humidity
+  - radiation_proxy
+  - soil_temperature
+  - vpd
+  - light_lux
+  - ec25
+  - ph
+  - irrigation_event_observed
+  - irrigation_lph
+categorical_features: []
+cleaning:
+  duplicate_strategy: last
+  missing_numeric: interpolate_ffill_bfill
+  bounds:
+    soil_moisture: [0.0, 100.0]
+    air_temperature: [-10.0, 60.0]
+    relative_humidity: [0.0, 100.0]
+    radiation_proxy: [0.0, 3000.0]
+    soil_temperature: [-10.0, 60.0]
+    vpd: [0.0, 10.0]
+    light_lux: [0.0, 300000.0]
+    ec25: [0.0, 10000.0]
+    ph: [0.0, 14.0]
+    irrigation_event_observed: [0.0, 1.0]
+    irrigation_lph: [0.0, 50.0]
+resample:
+  enabled: true
+  aggregation:
+    soil_moisture: mean
+    air_temperature: mean
+    relative_humidity: mean
+    radiation_proxy: mean
+    soil_temperature: mean
+    vpd: mean
+    light_lux: mean
+    ec25: mean
+    ph: mean
+    irrigation_event_observed: max
+    irrigation_lph: sum
