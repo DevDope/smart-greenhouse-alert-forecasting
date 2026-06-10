@@ -1,6 +1,6 @@
-# Texcoco Enriched Dataset Dictionary
+# Texcoco Dataset Dictionary
 
-This dictionary describes the enriched dataset used by the reviewer reproduction package. It describes the benchmark-ready file, not the preliminary raw sensor export.
+This dictionary describes the dataset used by the reviewer reproduction package. It describes the benchmark-ready file, not the preliminary raw sensor export.
 
 ## File
 
@@ -67,7 +67,7 @@ Columns using the `outside_nasa_` prefix include:
 
 ## Astronomical Context
 
-The enriched file includes astronomical context derived for the greenhouse location and local timestamp. Exp19 mainly uses solar-position and day-length context:
+The dataset includes astronomical context derived for the greenhouse location and local timestamp. Exp19 mainly uses solar-position and day-length context:
 
 - `outside_solar_elevation_angle`
 - `outside_day_length_hours`
@@ -76,7 +76,7 @@ The enriched file includes astronomical context derived for the greenhouse locat
 
 ## Weather-Source Views
 
-Exp19 uses three views over the same enriched file:
+Exp19 uses three views over the same dataset file:
 
 | View | Config | Description |
 | --- | --- | --- |

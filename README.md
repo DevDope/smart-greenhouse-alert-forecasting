@@ -14,7 +14,7 @@ The default reproduction path is:
 
 ```text
 configs/                 Experiment, data, task, and model YAML files
-data/raw/texcoco/         Compressed Texcoco enriched dataset and data dictionary
+data/raw/texcoco/         Compressed Texcoco dataset and data dictionaries
 scripts/reviewer_tui.py   Small command-line menu for reviewers
 src/                      Benchmark pipeline, models, evaluation, and reporting
 tests/                    Minimal checks for configuration and dataset readiness
@@ -34,6 +34,55 @@ data/raw/texcoco/proto_enriched_outside_weather.csv
 ```
 
 The archive hash is recorded in `data/raw/texcoco/MANIFEST.json`.
+
+## Dataset
+
+The dataset contains greenhouse sensor readings from Texcoco, State of Mexico, Mexico, combined with external weather-source variables and astronomical context used by the benchmark. It is distributed as a compressed archive so reviewers can reproduce the exact input used by the pipeline.
+
+The main metric dictionary is provided in:
+
+```text
+data/raw/texcoco/weather_metric_dictionary.xlsx
+data/raw/texcoco/DATA_DICTIONARY.md
+```
+
+Dataset summary:
+
+| Property | Value |
+| --- | --- |
+| Main CSV after extraction | `proto_enriched_outside_weather.csv` |
+| Rows | `14,316` |
+| Columns | `111` |
+| Site | Greenhouse in Texcoco, State of Mexico, Mexico |
+| Crop context | Tomato greenhouse crop canopy |
+| Coordinates for external context | latitude `19.496304`, longitude `-98.865113` |
+| Time zone | `America/Mexico_City` |
+| Documented period | `2025-09-11 06:37:14` to `2025-10-30 23:59:59` |
+| Internal sensor frequency | approximately every `5 min`; not resampled to hourly |
+| External weather frequency | hourly |
+| Weather merge rule | local hourly block assignment; no interpolation to 5 min |
+
+The 111 columns are grouped as follows:
+
+| Source | Columns | What they contain |
+| --- | ---: | --- |
+| Internal greenhouse sensors | 30 | Timestamp fields, air temperature, relative humidity, dew point, VPD, absolute humidity, vertical air measurements, light, PPFD, UV, soil, solution, and irrigation-related fields |
+| Open-Meteo | 36 | Hourly outside temperature, humidity, dew point, precipitation, pressure, radiation, wind, evapotranspiration, VPD, daylight flag, lags, rolling sums, daily summaries, and inside-outside contrasts |
+| NASA POWER | 37 | Hourly outside temperature, humidity, dew point, precipitation, pressure, wind, radiation/PAR, VPD, daylight flag, lags, rolling sums, daily summaries, and inside-outside contrasts |
+| Calculated astronomy | 8 | Solar elevation, solar azimuth, day length, minutes since sunrise, minutes until sunset, moon phase, moon illumination, and moon age |
+
+The internal greenhouse measurements keep their original approximate 5 min cadence. External variables with the `outside_` prefix are hourly or derived from hourly weather records. They describe outside conditions, not direct internal greenhouse measurements. Several internal observations can therefore share the same outside-weather value within one local hour.
+
+The fused weather view is not a fourth data source. It is a benchmark view constructed from selected Open-Meteo and NASA POWER columns, including means, maxima, absolute gaps, and comparable rolling summaries.
+
+Important interpretation notes:
+
+- `lux` is visible illuminance and is not equivalent to solar radiation or PPFD.
+- `ppfd` is the photosynthetic photon flux density proxy used as the most crop-relevant internal light variable.
+- VPD-related variables describe atmospheric evaporative demand.
+- Dew point variables help interpret condensation risk.
+- Precipitation and wind variables are external weather context; they do not measure rainfall entering the greenhouse, crop wetting, structural damage, disease, or verified management action.
+- CO2 and ventilation variables are not used by this benchmark and are not candidate features for Exp19.
 
 ## Installation
 

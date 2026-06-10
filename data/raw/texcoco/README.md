@@ -1,6 +1,6 @@
 # Texcoco Data Folder
 
-This folder contains the compressed enriched dataset used by the benchmark.
+This folder contains the compressed dataset used by the benchmark.
 
 Before running the benchmark, extract:
 
